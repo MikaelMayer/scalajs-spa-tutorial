@@ -12,4 +12,7 @@ trait Api {
 
   // delete a Todo
   def deleteTodo(itemId: String): Seq[TodoItem]
+  
+  // Retrieve a message
+  def getMessage(what: String): ReturnResult
 }

@@ -3,9 +3,10 @@ package spatutorial.client.services
 import autowire._
 import rx._
 import spatutorial.client.ukko._
-import spatutorial.shared.{TodoItem, Api}
+import spatutorial.shared.{TodoItem, Api, _}
 import boopickle.Default._
 import scala.scalajs.concurrent.JSExecutionContext.Implicits.runNow
+import scala.scalajs.js
 
 case object RefreshTodos
 
@@ -33,6 +34,12 @@ trait TodoStore extends Actor {
       // load all todos from the server
       AjaxClient[Api].getTodos().call().foreach { todos =>
         updateItems(todos)
+      }
+      AjaxClient[Api].getMessage("1234").call().foreach {
+        case Success =>
+          js.Dynamic.global.console("yeepee")
+        case Failure =>
+          js.Dynamic.global.console("Failure")
       }
     case UpdateAllTodos(todos) =>
       updateItems(todos)

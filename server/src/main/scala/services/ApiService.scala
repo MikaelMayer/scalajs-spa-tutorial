@@ -44,4 +44,9 @@ class ApiService extends Api {
     todos = todos.filterNot(_.id == itemId)
     todos
   }
+  
+  override def getMessage(s: String): ReturnResult = s match {
+    case "1234" => Success
+    case _ => Failure
+  }
 }
